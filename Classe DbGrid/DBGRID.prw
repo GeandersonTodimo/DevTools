@@ -1,5 +1,5 @@
 #INCLUDE 'PROTHEUS.CH'
-#INCLUDE 'IDATOOLS.CH'
+// #INCLUDE 'IDATOOLS.CH'
 
 
 /*/{Protheus.doc} DBGrid

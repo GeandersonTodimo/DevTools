@@ -1,1 +1,14 @@
 .project
+.vscode/settings.json
+.vscode/launc
+.vscode
+.vscode/launch.json
+.vscode/settings.json
+*.txt
+*.log
+/.vscode
+/1Compatibilizador
+/1EXCLUIR_PROJETO
+/1TESTE
+/Valberg em Desenvolvimento
+/Patchs
