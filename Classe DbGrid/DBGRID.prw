@@ -1,13 +1,12 @@
 #INCLUDE 'PROTHEUS.CH'
-// #INCLUDE 'IDATOOLS.CH'
+#INCLUDE 'IDATOOLS.CH'
 
 
 /*/{Protheus.doc} DBGrid
-@description Esta é a implementacao de uma Grid com Heranca da Classe MsNewGetDados com adições de propriedades e eventos.
-
+Esta ï¿½ a implementacao de uma Grid com Heranca da Classe MsNewGetDados com adiï¿½ï¿½es de propriedades e eventos.
+@type function
 @author	Helitom Silva
 @since	11/05/2012
-
 /*/
 CLASS DBGrid FROM MsNewGetDados
 
@@ -41,19 +40,19 @@ CLASS DBGrid FROM MsNewGetDados
 				
 	DATA hDepMarc
 	DATA hoOk       /* Atributo que tem a imagem de checado */
-	DATA hoNo       /* Atributo que tem a imagem de não checado */
-	DATA hDuplClk   /* Atributo de Duplo Click para quando não for usar o CheckBox */
-	DATA hVldMarc	/* Validação para marcação do CheckBox quando usar o CheckBox */
+	DATA hoNo       /* Atributo que tem a imagem de nï¿½o checado */
+	DATA hDuplClk   /* Atributo de Duplo Click para quando nï¿½o for usar o CheckBox */
+	DATA hVldMarc	/* Validaï¿½ï¿½o para marcaï¿½ï¿½o do CheckBox quando usar o CheckBox */
 	DATA hAnteCriar /* Bloco de codigo que sera executado, antes da criacao da grid */
 	DATA hAPosCriar /* Bloco de codigo que sera executado, apos a criacao da grid */
-	DATA cReadVar   /* Nome da Variável da Instancia da Classe */
+	DATA cReadVar   /* Nome da Variï¿½vel da Instancia da Classe */
 	DATA bChange    /* Bloco de Codigo executado ao mudar de linha */
 	
 	METHOD CREATE() CONSTRUCTOR
 	METHOD CRIARGRID()
-	METHOD ANTESCRIAR()   /* Metodo que será executado antes de criar, usando o atributo hAnteCriar */
-	METHOD APOSCRIAR()    /* Metodo que será executado apos criar, usando o atributo hAPosCriar */
-	METHOD SETAPOSCRIAR() /* Metodo que será executado apos criar, usando o atributo hAPosCriar */
+	METHOD ANTESCRIAR()   /* Metodo que serï¿½ executado antes de criar, usando o atributo hAnteCriar */
+	METHOD APOSCRIAR()    /* Metodo que serï¿½ executado apos criar, usando o atributo hAPosCriar */
+	METHOD SETAPOSCRIAR() /* Metodo que serï¿½ executado apos criar, usando o atributo hAPosCriar */
 	METHOD MARDESM()
 	METHOD CLICKCOL()
 	METHOD ATUMEMO()
@@ -122,18 +121,18 @@ ENDCLASS
 @since	11/05/2012
 
 @param p_nCheckBox, Numerico, 0 - para criar a Grid sem a coluna do CheckBox ou 1 - para criar a Grid com a coluna do CheckBox
-@param p_nImgCheck, Numerico, 0 - para criar a Grid com imagem checkbox cores  ImgCheck ou 1 - para criar a Grid com imagem checkbox padrão ImgCheck
-@param p_bAposCriar, BlocoDeCodigo, Bloco de codigo que será executado ao criar a Grid
-@param p_cCamVal, Caracter, Nome do Campo a ser avaiado na criação para ja trazer a linha marcada ao criar a grid
-@param p_nSinal, Numerico, Numero indentificador do sinal a ser avaliado o campo para marcação na criação da grid, sendo: 1 - Igual(=) | 2 - Diferente(!=) | 3 - Maior(>) | 4 - Menor(<) | 5 - Pertence($)
-@param p_uValDef, Indefinido, Valor do campo a ser avaliado para marcação na criação da Grid
-@param p_lCheckIni, Numerico, Se .T. a coluna de marcação será apresentada no inicio das colunas, do contrario ao final
-@param p_lLegenda, Logico, Se .T. Habilita a apresentação da coluna Legenda
+@param p_nImgCheck, Numerico, 0 - para criar a Grid com imagem checkbox cores  ImgCheck ou 1 - para criar a Grid com imagem checkbox padrï¿½o ImgCheck
+@param p_bAposCriar, BlocoDeCodigo, Bloco de codigo que serï¿½ executado ao criar a Grid
+@param p_cCamVal, Caracter, Nome do Campo a ser avaiado na criaï¿½ï¿½o para ja trazer a linha marcada ao criar a grid
+@param p_nSinal, Numerico, Numero indentificador do sinal a ser avaliado o campo para marcaï¿½ï¿½o na criaï¿½ï¿½o da grid, sendo: 1 - Igual(=) | 2 - Diferente(!=) | 3 - Maior(>) | 4 - Menor(<) | 5 - Pertence($)
+@param p_uValDef, Indefinido, Valor do campo a ser avaliado para marcaï¿½ï¿½o na criaï¿½ï¿½o da Grid
+@param p_lCheckIni, Numerico, Se .T. a coluna de marcaï¿½ï¿½o serï¿½ apresentada no inicio das colunas, do contrario ao final
+@param p_lLegenda, Logico, Se .T. Habilita a apresentaï¿½ï¿½o da coluna Legenda
 @param p_aLegenda, Array, Vetor com as Legendas no formato exemplo: {{"BR_VERMELHO", "Pendente"}, {"BR_VERDE", "Conferido"}, {"BR_PRETO", "Finalizado"}} 
-@param p_lLegIni, Logico, Se .T. a legenda será apresentada no inicio das colunas, do contrario ao final
-@param p_lHabReord, Logico, Se .T. habilita a reordenação da coluna clicando no Titulo da Coluna
-@param p_cDesMarc, Caracter, Descrição da coluna de Marcação (CheckBox)
-@param p_cDesLeg, Caracter, Descrição da coluna de Legenda
+@param p_lLegIni, Logico, Se .T. a legenda serï¿½ apresentada no inicio das colunas, do contrario ao final
+@param p_lHabReord, Logico, Se .T. habilita a reordenaï¿½ï¿½o da coluna clicando no Titulo da Coluna
+@param p_cDesMarc, Caracter, Descriï¿½ï¿½o da coluna de Marcaï¿½ï¿½o (CheckBox)
+@param p_cDesLeg, Caracter, Descriï¿½ï¿½o da coluna de Legenda
 
 /*/
 METHOD CREATE(p_nTop, p_nLeft, p_nBottom, p_nRight, p_nTipoEdit, p_cLinhaOK, p_cTudoOK, ;
@@ -183,7 +182,7 @@ METHOD CREATE(p_nTop, p_nLeft, p_nBottom, p_nRight, p_nTipoEdit, p_cLinhaOK, p_c
 	Self:hHeader := {}
 	Self:hCols   := {}
 	Self:hoOk	 := Iif(Self:hImgCheck == 1, LoadBitmap(GetResources(), "LBOK"), "BR_VERDE") /* Obtem o tipo de imagem Checado ou Verde */
-	Self:hoNo	 := Iif(Self:hImgCheck == 1, LoadBitmap(GetResources(), "LBNO"), "BR_VERMELHO") /* Obtem o tipo de imagem Não Checado ou Vermelho */
+	Self:hoNo	 := Iif(Self:hImgCheck == 1, LoadBitmap(GetResources(), "LBNO"), "BR_VERMELHO") /* Obtem o tipo de imagem Nï¿½o Checado ou Vermelho */
 		
 	If Self:hCheckBox = 1 .and. p_lCheckIni
 		aAdd(Self:hHeader, {p_cDesMarc, "HS_STATUS", "@BMP", 1, 0,"" ,,"C" ,,,,,,"V",,,.F.})
@@ -314,7 +313,7 @@ RETURN SELF
 @author	Helitom Silva
 @since	11/05/2012
 
-@param p_nTipo, Numerico, Define o tipo de marcação a ser executando, sendo: 0 - para marcar apenas a linha selecionada ou 1 - para marcar todas as linhas da Grid ou 2 - para desmarcar todas as Linhas da Grid
+@param p_nTipo, Numerico, Define o tipo de marcaï¿½ï¿½o a ser executando, sendo: 0 - para marcar apenas a linha selecionada ou 1 - para marcar todas as linhas da Grid ou 2 - para desmarcar todas as Linhas da Grid
 @param p_lUser, Numerico, Se .T. indica que o metodo esta sendo executado por meio manual do usuario, caso contrario indica que esta sendo executado automatico.
 
 /*/
@@ -356,7 +355,7 @@ METHOD MARDESM(p_nTipo, p_lUser) CLASS DBGrid
 	   
 	ElseIf p_nTipo = 1
    
-		If .not. Self:hExecMarc > 0 /* Esse tratamento é feito porque o evento de clique na coluna executava duas vezes por padrao da MSNEWGETDADOS */
+		If .not. Self:hExecMarc > 0 /* Esse tratamento ï¿½ feito porque o evento de clique na coluna executava duas vezes por padrao da MSNEWGETDADOS */
       
 			For nLin := 1 To Len(Self:aCols)
 				If (Self:aCols[nLin][Len(Self:aHeader) + 1] = .F.)
@@ -522,7 +521,7 @@ RETURN
 
 
 /*/{Protheus.doc} MARCADO
-@description Metodo para verificação se o checkbox da linha esta marcado. 
+@description Metodo para verificaï¿½ï¿½o se o checkbox da linha esta marcado. 
      
 @author	Helitom Silva
 @since	14/05/2012
@@ -598,7 +597,7 @@ RETURN
 
 
 /*/{Protheus.doc} DUPLOCLICK
-@description  Metodo que executa o duplo click quando não existe checkbox e tambem esta preenchido o valor para o atributo hDuplClk
+@description  Metodo que executa o duplo click quando nï¿½o existe checkbox e tambem esta preenchido o valor para o atributo hDuplClk
     
 @author	Helitom Silva
 @since	14/01/2013
@@ -646,7 +645,7 @@ RETURN
 
 
 /*/{Protheus.doc} ANTESCRIAR
-@description  Metodo executado após Criar a Grid
+@description  Metodo executado apï¿½s Criar a Grid
 
 @author  Helitom Silva
 @since	 11/08/2014
@@ -682,12 +681,12 @@ RETURN lRet
 
 
 /*/{Protheus.doc} SETNOTDEL
-@description Define linha como não deletada
+@description Define linha como nï¿½o deletada
 
 @author  Helitom Silva
 @since   28/08/2014
 
-@param p_nLinha, Numerico, Numero da Linha a ser marcada como não deletada
+@param p_nLinha, Numerico, Numero da Linha a ser marcada como nï¿½o deletada
 
 /*/
 METHOD SETNOTDEL(p_nLinha, p_lRefresh)  CLASS DBGrid
@@ -729,12 +728,12 @@ Return
 
 
 /*/{Protheus.doc} POSCOLUNA
-@description Retorna o numero(posição) da coluna
+@description Retorna o numero(posiï¿½ï¿½o) da coluna
 
 @author  Helitom Silva
 @since   19/08/2014
 
-@param p_cColuna, Caracter, Nome do Campo Coluna a ser retornada a posição
+@param p_cColuna, Caracter, Nome do Campo Coluna a ser retornada a posiï¿½ï¿½o
 
 /*/
 METHOD POSCOLUNA(p_cColuna) CLASS DBGrid
@@ -878,7 +877,7 @@ RETURN nRet
 		
 @param p_cColuna, Caracter, Nome da coluna
 @param p_nLinha, Numerico, Numero da linha da Grid a ser retornado o valor da coluna
-@param p_uDefault, Indefinido, Valor Default de retorno, caso não exista Valor.
+@param p_uDefault, Indefinido, Valor Default de retorno, caso nï¿½o exista Valor.
 
 @return p_uValor, Indefinido, Valor da coluna
 
@@ -1222,12 +1221,12 @@ RETURN
 
 
 /*/{Protheus.doc} DIMWND
-@description Retorna posição em pixels  dimencionada
+@description Retorna posiï¿½ï¿½o em pixels  dimencionada
 	
 @author  Helitom Silva
 @since   27/08/2014
 		
-@param p_nTam, Numerico, posição em pixels a ser dimencionada
+@param p_nTam, Numerico, posiï¿½ï¿½o em pixels a ser dimencionada
 
 /*/
 METHOD DIMWND(p_nTam) CLASS DBGrid
@@ -1264,7 +1263,7 @@ RETURN Int(p_nTam)
 
 
 /*/{Protheus.doc} REFRESH
-@description Executa atualização da interface da Grid
+@description Executa atualizaï¿½ï¿½o da interface da Grid
 
 @author Helitom Silva
 @since  19/09/2014
@@ -1285,15 +1284,15 @@ RETURN
 
 
 /*/{Protheus.doc} SETREL
-@description Define dados do Relatório
+@description Define dados do Relatï¿½rio
 
 @author Helitom Silva
 @since  07/11/2014
 
-@param p_cRelProgr, Caracter, Programa de origem do relatório
-@param p_cRelTitul, Caracter, Titulo do Relatório
-@param p_cRelDescr, Caracter, Descrição do Relatório
-@param p_lColImp, Logico, Se .T. Define ou Redefine as Colunas de Impressão
+@param p_cRelProgr, Caracter, Programa de origem do relatï¿½rio
+@param p_cRelTitul, Caracter, Titulo do Relatï¿½rio
+@param p_cRelDescr, Caracter, Descriï¿½ï¿½o do Relatï¿½rio
+@param p_lColImp, Logico, Se .T. Define ou Redefine as Colunas de Impressï¿½o
 
 
 /*/
@@ -1303,8 +1302,8 @@ METHOD SETREL(p_cRelProgr, p_cRelTitul, p_cRelDescr, p_lColImp) CLASS DBGrid
 	Local oDlgDef := GetWndDefault()
 	
 	Default p_cRelProgr := Self:GetOrigem()
-	Default p_cRelTitul := Iif(!Empty(AllTrim(oDlgDef:cCaption)), AllTrim(oDlgDef:cCaption), 'Relatório de Dados da Grid')
-	Default p_cRelDescr := Iif(!Empty(AllTrim(oDlgDef:cCaption)), AllTrim(oDlgDef:cCaption), 'Relação de Dados da Grid')
+	Default p_cRelTitul := Iif(!Empty(AllTrim(oDlgDef:cCaption)), AllTrim(oDlgDef:cCaption), 'Relatï¿½rio de Dados da Grid')
+	Default p_cRelDescr := Iif(!Empty(AllTrim(oDlgDef:cCaption)), AllTrim(oDlgDef:cCaption), 'Relaï¿½ï¿½o de Dados da Grid')
 	Default p_lColImp   := .F.
 	
 	Self:cRelProgr  := p_cRelProgr
@@ -1337,9 +1336,9 @@ RETURN
 @since  07/11/2014
 
 @param p_cColuna, Caracter, Nome da Coluna
-@param p_lImprime, Logico, Se .T. Indica que será apresentada a coluna no relatorio, caso contrario não será apresentada
-@param p_lImpTotal, Logico, Se .T. Indica que será feito a totalização da coluna
-@param p_nTpTotal, Numerico, Se 1 - Indica que será feito a a contagem nos totais da coluna e 2 - 1 - Indica que será feito a a soma nos totais da coluna.
+@param p_lImprime, Logico, Se .T. Indica que serï¿½ apresentada a coluna no relatorio, caso contrario nï¿½o serï¿½ apresentada
+@param p_lImpTotal, Logico, Se .T. Indica que serï¿½ feito a totalizaï¿½ï¿½o da coluna
+@param p_nTpTotal, Numerico, Se 1 - Indica que serï¿½ feito a a contagem nos totais da coluna e 2 - 1 - Indica que serï¿½ feito a a soma nos totais da coluna.
 
 /*/
 METHOD SETCOLIMP(p_cColuna, p_lImprime, p_lImpTotal, p_nTpTotal) CLASS DBGrid
@@ -1386,7 +1385,7 @@ RETURN aRet
 
 
 /*/{Protheus.doc} PRINT
-@description Imprimir relatório com dados da Grid
+@description Imprimir relatï¿½rio com dados da Grid
 
 @author Helitom Silva
 @since  07/11/2014
@@ -1405,7 +1404,7 @@ RETURN
 
 
 /*/{Protheus.doc} REPORTDEF
-@description Define Layout do relatório da Grid
+@description Define Layout do relatï¿½rio da Grid
 
 @author Helitom Silva
 @since  07/11/2014
@@ -1455,7 +1454,7 @@ RETURN oReport
 
 
 /*/{Protheus.doc} PRINTREPORT
-@description Executa impressão de relatório
+@description Executa impressï¿½o de relatï¿½rio
 
 @author Helitom Silva
 @since  07/11/2014
@@ -1495,7 +1494,7 @@ RETURN
 
 
 /*/{Protheus.doc} SETPOPUP
-@description Define Menus de Contexto, que aparecem ao clicar com o Botão direito sobre a Grid.
+@description Define Menus de Contexto, que aparecem ao clicar com o Botï¿½o direito sobre a Grid.
 
 @author Helitom Silva
 @since  07/10/2014
@@ -1600,7 +1599,7 @@ RETURN
 
 
 /*/{Protheus.doc} ExecFiltro
-@description Função responsavel por realizar os filtros selecionados pelo usuario 
+@description Funï¿½ï¿½o responsavel por realizar os filtros selecionados pelo usuario 
 
 @author  Helitom Silva
 @since 	 10/04/2015
@@ -1695,7 +1694,7 @@ RETURN Self:aColsOri
 
 
 /*/{Protheus.doc} GETCOLSDIF
-@description Verifica se houve alteração nos dados da Grid.
+@description Verifica se houve alteraï¿½ï¿½o nos dados da Grid.
 
 @author Helitom Silva
 @since 30/04/2015
@@ -1834,7 +1833,7 @@ RETURN
 
 
 /*/{Protheus.doc} CHGFSEARCH
-@description Alteração da Coluna a ser Pesquisada.
+@description AlteraÃ§Ã£o da Coluna a ser Pesquisada.
 
 @author  Helitom Silva
 @since   10/08/2015

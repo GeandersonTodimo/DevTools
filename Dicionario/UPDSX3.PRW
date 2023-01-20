@@ -112,7 +112,7 @@ RETURN SELF
 /*{ProtheusDoc} UPDSX3:CLONE
 	@description clona um campo e adiciona um novo campo ao modelo.
 
-	@history 16/05/2015, Geanderson Silva, Criação do campo arquivo para evitar criar campo na tabela errada.
+	@history 16/05/2015, Geanderson Silva, Criaï¿½ï¿½o do campo arquivo para evitar criar campo na tabela errada.
 
 	@param	cFieldOri,character, campo do dicionÃ¡rio que serÃ¡ usado para criar o campo cFieldDes
 	@param	cFieldDes,character, nome do novo campo
@@ -418,7 +418,7 @@ RETURN CORDEM
 	NO ALIAS
 
 	@developer	fernando.alencar
-	@data		20 de MARÇO de 2012
+	@data		20 de MARï¿½O de 2012
 */
 METHOD ADDFILIAL(CALIAS) CLASS UPDSX3
 
