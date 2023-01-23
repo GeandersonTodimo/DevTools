@@ -10,35 +10,32 @@
 #INCLUDE "TBICONN.CH"
 
 
-/* ANTIGO */
-#DEFINE X3_USADO_EMUSO 		"€€€€€€€€€€€€€€ "
-#DEFINE X3_USADO_NAOUSADO 	"€€€€€€€€€€€€€€€"
-#DEFINE X3_USADO_USADOKEY 	"€€€€€€€€€€€€€€€"
-#DEFINE X3_OBRIGATORIO 		"Á€"                 
-#DEFINE X3_RESER 			"þÀ"
+//ANTIGO
+#DEFINE X3_USADO_EMUSO 		"x       x       x       x       x       x       x       x       x       x       x       x       x       x         x     "
+#DEFINE X3_USADO_NAOUSADO 	"x       x       x       x       x       x       x       x       x       x       x       x       x       x       x       "
+#DEFINE X3_USADO_USADOKEY 	"x       x       x       x       x       x       x       x       x       x       x       x       x       x       x       "
+#DEFINE X3_OBRIGATORIO 		"x     x         "                 
+#DEFINE X3_RESER 			"xxxxxx x        "
 #DEFINE X3_RESER_NUMERICO 	"øÇ"
-#DEFINE X3_RESERKEY 		"ƒ€"
-#DEFINE X3_RES        		"€€"              
-#DEFINE X3_RESNAO  			"›€"
+#DEFINE X3_RESERKEY         "     xx         "
+#DEFINE X3_RES        		"                "              
+#DEFINE X3_RESNAO  			"  xx xx         "
 
-/* UTILIZANDO ATÉ O MOMENTO */
-#DEFINE X3_USADO_FILIAL		"€€€€€€€€€€€€€€€"
-#DEFINE X3_RESERV_FILIAL	"€€"
+//UTILIZANDO ATÉ O MOMENTO
+#DEFINE X3_USADO_FILIAL		"x       x       x       x       x       x       x       x       x       x       x       x       x       x       x       "
+#DEFINE X3_RESERV_FILIAL	"                "
 
-#DEFINE X3_USADO_MSFIL  	"€€€€€€€€€€€€€€€"
-#DEFINE X3_RESERV_MSFIL 	"‚€"
+#DEFINE X3_USADO_KEY		"x       x       x       x       x       x       x       x       x       x       x       x       x       x       x xx    "
+#DEFINE X3_RESERV_KEY	    "     xx         "
 
-#DEFINE X3_USADO_KEY		"€€€€€€€€€€€€€€°"
-#DEFINE X3_RESERV_KEY		"ƒ€"
+#DEFINE X3_USADO_OBR		"x       x       x       x       x       x       x       x       x       x       x       x       x       x       x x     "
+#DEFINE X3_RESERV_OBR	    "  x  xx         "
 
-#DEFINE X3_USADO_OBR		"€€€€€€€€€€€€€€ "
-#DEFINE X3_RESERV_OBR		"“€"
+#DEFINE X3_USADO_OPC		"x       x       x       x       x       x       x       x       x       x       x       x       x       x       x x     "
+#DEFINE X3_RESERV_OPC	    "  x  x x     x  "
 
-#DEFINE X3_USADO_OPC		"€€€€€€€€€€€€€€ "
-#DEFINE X3_RESERV_OPC		"’A"
-
-#DEFINE X3_USADO_NAO		"€€€€€€€€€€€€€€€"
-#DEFINE X3_RESERV_NAO		"’A"
+#DEFINE X3_USADO_NAO		"x       x       x       x       x       x       x       x       x       x       x       x       x       x       x       "
+#DEFINE X3_RESERV_NAO	    "  x  x x     x  "
 
 /*/{Protheus.doc} IdaTools
 @description Neste arquivo sao armazenadas funcoes genericas
