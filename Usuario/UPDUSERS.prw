@@ -10,29 +10,72 @@ Lista os usuarios para realizar a alteração de senha.
 /*/
 User Function UPDUSERS
 
+    local lRet := .f.
     local cUserAlias := "USERSTMP"
+    local cPathUser := ""
+    local strJson := Nil
+    local lenStrJson := 0
+    local jsonfields := {}
+    local nRetParser := 0
+    local keyVal, keyType
+    // Private oJsonRet := tJsonParser():New()
+    local oJsonRet := JsonObject():new()
+    local oExecUtil := TDGE003C():New()
 
-    BeginSql Alias cUserAlias
-        SELECT
-            USR_ID,
-            USR_CODIGO,
-            USR_NOME,
-            USR_EMAIL
-        FROM
-            SYS_USR
-        WHERE
-            D_E_L_E_T_ = ' ' 
-            AND USR_MSBLQL = '2'
-            AND USR_ID NOT IN ('000000')
-    EndSql
+    private cEndAPI := "" //Vai obter a url da API no arquivo de configuração
+    Private aHeadOut := {}
+    Private oRestClient := nil
 
-    DBSelectArea(cUserAlias)
-    While (cUserAlias)->(!Eof())
-        if !U_UPDUSRPW((cUserAlias)->USR_ID)
-            varinfo("Houve erro no usuario id ->",(cUserAlias)->USR_ID)
-        endif
-        (cUserAlias)->(DbSkip())
-    EndDo
+    U_ATUACONFIG() //Obtem os parãmentros de configuração do arquivo
+    oExecUtil:Login(.f.)
+    if ValType(oExecUtil:jTDGE003C['PASSWORD']) == "C"
+        oRestClient := FWRest():New(cEndAPI)
+        Aadd(aHeadOut, "Content-Type: application/json")
+        cPathUser := "/api/oauth2/v1/token?grant_type=password&password="+Alltrim(oExecUtil:jTDGE003C['PASSWORD'])+"&username="+Alltrim(oExecUtil:jTDGE003C['USERNAME'])+""
+        oRestClient:setPath(cPathUser)
+    endif
+
+    if oRestClient:Post(aHeadOut)
+        varinfo("Var oRestClient:GetResult()",oRestClient:GetResult())
+        strJson := oRestClient:GetResult()
+        oJsonRet:fromJson(strJson)
+        lRet := oJsonRet:GetJsonValue("access_token", @keyVal, @keyType)
+        If ( !lRet )
+            varinfo("Erro ao criar o objeto json")
+        Else
+            Aadd(aHeadOut, "Authorization: Bearer "+keyVal)
+        EndIf
+    else
+        varinfo("Var oRestClient:GetLastError()",oRestClient:GetLastError())
+    endif
+
+    if lRet
+        BeginSql Alias cUserAlias
+            SELECT
+                USR_ID,
+                USR_CODIGO,
+                USR_NOME,
+                USR_EMAIL
+            FROM
+                SYS_USR
+            WHERE
+                D_E_L_E_T_ = ' ' 
+                AND USR_MSBLQL = '2'
+                AND USR_ID NOT IN ('000000','001496','001288','001287','001445','001446','001497','001289','001447','001443','001444','001495','001495','001391','001242')
+                AND NOT USR_CODIGO LIKE 'JOB%'
+        EndSql
+
+        DBSelectArea(cUserAlias)
+        While (cUserAlias)->(!Eof())
+            if !U_UPDUSRPW((cUserAlias)->USR_ID)
+                varinfo("Houve erro no usuario id ->",(cUserAlias)->USR_ID)
+            endif
+            (cUserAlias)->(DbSkip())
+        EndDo
+    endif
+
+	oExecUtil := Nil
+	FreeObj(oExecUtil)
 
 Return
 
@@ -49,12 +92,8 @@ Função que executa o metodo PUT e altera a senha do usuario.
 User Function UPDUSRPW(pUserId)
 
     local lRet := .f.
-    local oRestClient := nil
-    local cUrl := ""
     local cPath := ""
-    local aHeadOut := {}
 
-    cUrl := "http://192.168.240.48:3905/REST"
     cPath := "/api/framework/v1/users/"+pUserId+""
 
     cBody :=    '{'
@@ -68,17 +107,9 @@ User Function UPDUSRPW(pUserId)
     cBody +=    '"primary": true'
     cBody +=    '}'
     cBody +=    '],'
-    if pUserId $ '001391/001242'
-        cBody +=    '"password":"20406080"'
-    else
-        cBody +=    '"password":"TESTE"'
-    endif
+    cBody +=    '"password":"TODIMO2023"'
     cBody +=    '}'
     
-    Aadd(aHeadOut, "Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InBKd3RQdWJsaWNLZXlGb3IyNTYifQ.eyJpc3MiOiJUT1RWUy1BRFZQTC1GV0pXVCIsInN1YiI6IkdFQU5ERVJTT04uU0lMVkEiLCJpYXQiOjE2NzQ0NzU0MDQsInVzZXJpZCI6IjAwMTM5MSIsImV4cCI6MTY3NDQ3OTAwNCwiZW52SWQiOiJQMTJURVNURV8zIn0.enwzTbEG9fXw1LerwO7LZaeKaDCuCfzKAHrgji0L2YkWdd8ObWiigwzTRQk6Q6uO2FFphECphtALunwxY29peihscVS1n2r652aag8oaSE3F7ODQnMZ8Nagl_lyY3Y_GWuIOeHGkwzS9hiYCutp87Rs2jEk7DN9KX2HyMZY7-Q7qE1-mDwWvZRCMPbQZExnD2iFXhbK2KLbprpO6qtsjQIodr9Dvqol-4yTxOkRkmWsBTBCID-bcwE7-BiGUQMdhPTuha4mu1IflVUIsrLPAaHy9kFpvn7YNOAkE4plcs_oPJJtX7IY82ItZ5FKsaQFK4Fh6r3WmwYjdrUR_YZe9bA")
-    Aadd(aHeadOut, "Content-Type: application/json")
-
-    oRestClient := FWRest():New(cUrl)
     oRestClient:setPath(cPath)
 
     if oRestClient:Put(aHeadOut,cBody)
@@ -87,8 +118,5 @@ User Function UPDUSRPW(pUserId)
     else
         varinfo("Var oRestClient:GetLastError()",oRestClient:GetLastError())
     endif
-
-    // PswOrder(1)
-    // lSeek := PswSeek("GEANDERSON.SILVA",.t.)
 
 Return lRet
